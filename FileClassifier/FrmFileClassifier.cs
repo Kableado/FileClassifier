@@ -288,6 +288,7 @@ namespace FileClassifier
             }
             foreach (FileCluster cluster in clusters)
             {
+                if (cluster.Files.Count == 0) { continue; }
                 cluster.DateStart = cluster.Files.Min(fd => fd.Date);
                 cluster.DateEnd = cluster.Files.Max(fd => fd.Date);
                 TimeSpan tsCluster = cluster.DateEnd - cluster.DateStart;
@@ -302,6 +303,7 @@ namespace FileClassifier
             }
             foreach (FileCluster cluster in clusters)
             {
+                if (cluster.Files.Count == 0) { continue; }
                 string clusterPath = Path.Combine(path, cluster.DirName);
                 lsbOutput.AddLine(string.Format("Cluster: {0}", clusterPath));
                 if (doMove)
