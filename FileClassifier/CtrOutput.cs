@@ -51,6 +51,14 @@ namespace FileClassifier
                 Enabled = true
             };
             _timer.Tick += _timer_Tick;
+
+            Disposed += CtrOutput_Disposed;
+        }
+
+        private void CtrOutput_Disposed(object sender, EventArgs e)
+        {
+            _timer.Stop();
+            _timer.Enabled = false;
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
