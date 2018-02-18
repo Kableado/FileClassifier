@@ -32,7 +32,7 @@
             this.txtPath = new System.Windows.Forms.TextBox();
             this.btnTest = new System.Windows.Forms.Button();
             this.btnGo = new System.Windows.Forms.Button();
-            this.lsbOutput = new FileClassifier.CtrOutput();
+            this.ctrOutput = new FileClassifier.CtrOutput();
             this.btnCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -79,14 +79,14 @@
             // 
             // lsbOutput
             // 
-            this.lsbOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.ctrOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lsbOutput.Location = new System.Drawing.Point(12, 38);
-            this.lsbOutput.Name = "lsbOutput";
-            this.lsbOutput.Size = new System.Drawing.Size(359, 238);
-            this.lsbOutput.TabIndex = 9;
-            this.lsbOutput.DoubleClick += new System.EventHandler(this.lsbOutput_DoubleClick);
+            this.ctrOutput.Location = new System.Drawing.Point(12, 38);
+            this.ctrOutput.Name = "lsbOutput";
+            this.ctrOutput.Size = new System.Drawing.Size(359, 238);
+            this.ctrOutput.TabIndex = 9;
+            this.ctrOutput.DoubleClick += new System.EventHandler(this.lsbOutput_DoubleClick);
             // 
             // btnCancel
             // 
@@ -107,7 +107,7 @@
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnTest);
             this.Controls.Add(this.btnGo);
-            this.Controls.Add(this.lsbOutput);
+            this.Controls.Add(this.ctrOutput);
             this.Controls.Add(this.lblPath);
             this.Controls.Add(this.txtPath);
             this.Name = "FrmFileClassifier";
@@ -123,7 +123,7 @@
         private System.Windows.Forms.TextBox txtPath;
         private System.Windows.Forms.Button btnTest;
         private System.Windows.Forms.Button btnGo;
-        private FileClassifier.CtrOutput lsbOutput;
+        private FileClassifier.CtrOutput ctrOutput;
         private System.Windows.Forms.Button btnCancel;
     }
 }

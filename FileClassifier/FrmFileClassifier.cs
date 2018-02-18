@@ -167,7 +167,7 @@ namespace FileClassifier
             DateTime dtNow = DateTime.UtcNow;
             if (dtNow > lastMessage.AddSeconds(1))
             {
-                lsbOutput.AddLine(string.Format("Detected {0} files", files.Count));
+                ctrOutput.AddLine(string.Format("Detected {0} files", files.Count));
                 lastMessage = dtNow;
             }
         }
@@ -199,13 +199,13 @@ namespace FileClassifier
                 return;
             }
 
-            lsbOutput.Clean();
+            ctrOutput.Clean();
             lastMessage = DateTime.UtcNow;
             List<FileDesc> files = new List<FileDesc>();
             ScanDirectory(path, files);
             if (_running == false) { return; }
 
-            lsbOutput.AddLine(string.Format("Detected total {0} files", files.Count));
+            ctrOutput.AddLine(string.Format("Detected total {0} files", files.Count));
 
             // Duplicated files
             List<List<FileDesc>> duplicated = new List<List<FileDesc>>();
@@ -230,16 +230,16 @@ namespace FileClassifier
             {
                 foreach (List<FileDesc> dups in duplicated)
                 {
-                    lsbOutput.AddLine(string.Format("Duplicated file: {0}", dups[0].FileName));
+                    ctrOutput.AddLine(string.Format("Duplicated file: {0}", dups[0].FileName));
                     foreach (FileDesc file in dups)
                     {
-                        lsbOutput.AddLine(string.Format("         Path: {0}", file.Path), file.Path);
+                        ctrOutput.AddLine(string.Format("         Path: {0}", file.Path), file.Path);
                     }
                 }
             }
             else
             {
-                lsbOutput.AddLine("No duplicates found");
+                ctrOutput.AddLine("No duplicates found");
             }
 
             List<string> imageExtensions = new List<string> { ".jpg", ".jpeg", ".png", ".bpm", ".gif", ".tga", ".webp", };
@@ -248,13 +248,13 @@ namespace FileClassifier
                 .Where(fd => imageExtensions.Contains(fd.Extension) || movieExtensions.Contains(fd.Extension))
                 .OrderBy(fd => fd.Date)
                 .ToList();
-            lsbOutput.AddLine(string.Format("Detected {0} media", mediaFiles.Count));
+            ctrOutput.AddLine(string.Format("Detected {0} media", mediaFiles.Count));
 
             List<FileDesc> noMediaFiles = files
                .Where(fd => imageExtensions.Contains(fd.Extension) == false && movieExtensions.Contains(fd.Extension) == false)
                 .OrderBy(fd => fd.Date)
                 .ToList();
-            lsbOutput.AddLine(string.Format("Detected {0} no media", noMediaFiles.Count));
+            ctrOutput.AddLine(string.Format("Detected {0} no media", noMediaFiles.Count));
 
             // Find clusters
             int maxHoursDiff = 15;
@@ -305,14 +305,14 @@ namespace FileClassifier
             {
                 if (cluster.Files.Count == 0) { continue; }
                 string clusterPath = Path.Combine(path, cluster.DirName);
-                lsbOutput.AddLine(string.Format("Cluster: {0}", clusterPath));
+                ctrOutput.AddLine(string.Format("Cluster: {0}", clusterPath));
                 if (doMove)
                 {
                     BuildPath(clusterPath);
                 }
                 foreach (FileDesc file in cluster.Files)
                 {
-                    lsbOutput.AddLine(string.Format("         Path: {0} ", file.Path), file.Path);
+                    ctrOutput.AddLine(string.Format("         Path: {0} ", file.Path), file.Path);
                     if (doMove)
                     {
                         string newFilePath = Path.Combine(clusterPath, file.FileName);
@@ -322,7 +322,7 @@ namespace FileClassifier
             }
 
 
-            lsbOutput.AddLine("################ Finish ################");
+            ctrOutput.AddLine("################ Finish ################");
         }
 
         public void Buttons_ProcessEnabled(bool running)
@@ -349,7 +349,7 @@ namespace FileClassifier
 
             if (_running == false)
             {
-                lsbOutput.AddLine("################ Cancel ################");
+                ctrOutput.AddLine("################ Cancel ################");
                 Buttons_ProcessEnabled(false);
                 return;
             }
@@ -385,7 +385,7 @@ namespace FileClassifier
 
         private void lsbOutput_DoubleClick(object sender, EventArgs e)
         {
-            string strFile = lsbOutput.GetCurrentData() as string;
+            string strFile = ctrOutput.GetCurrentData() as string;
             if (string.IsNullOrEmpty(strFile)) { return; }
             System.Diagnostics.Process.Start(strFile);
         }
